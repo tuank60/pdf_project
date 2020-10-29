@@ -4,10 +4,14 @@ from sanic import response
 app = Sanic("hello_example")
 
 @app.route("/")
-async def test(request):    
+async def test(request):
   return json({"hello": "world solution"})
   # return await response.file('GFG.pdf')
   # return response.empty()
+
+@app.route('/file')
+async def handle_request123(request):
+    return await response.file('GFG.pdf')
 
 @app.route('/file')
 async def handle_request(request):
