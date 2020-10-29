@@ -5,7 +5,7 @@ app = Sanic("hello_example")
 
 @app.route("/")
 async def test(request):
-  return json({"hello": "world"})
+  return json({"hello": "worldbrand1"})
   # return await response.file('GFG.pdf')
   # return response.empty()
 
