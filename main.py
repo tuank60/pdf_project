@@ -4,7 +4,7 @@ from sanic import response
 app = Sanic("hello_example")
 
 @app.route("/")
-async def test(request):
+async def test(request):    
   return json({"hello": "world solution"})
   # return await response.file('GFG.pdf')
   # return response.empty()
