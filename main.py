@@ -5,12 +5,12 @@ app = Sanic("hello_example")
 
 @app.route("/")
 async def test(request):
-  return json({"hello": "world solution"})
+  return json({"hello": "world solution 1"})
   # return await response.file('GFG.pdf')
   # return response.empty()
 
 @app.route('/file')
-async def handle_request123(request):
+async def handle_request11(request):
     return await response.file('GFG.pdf')
 
 @app.route('/1raw')
