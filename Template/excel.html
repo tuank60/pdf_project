@@ -1,0 +1,65 @@
+<html>
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<script src="js/jquery.js"></script>
+	<script src="js/jszip.js"></script>
+	<script src="js/underscore.js"></script>
+	<script src="js/gonrin.core.js"></script>
+	<script src="js/gonrin.spreadsheet.js"></script>
+	<script type="text/javascript">
+            $(function () {
+                var report = gonrin.spreadsheet(
+                	{
+                        name: "Food Order",
+                        fields: [
+			        	     { field: "id", label:"ID"},
+			        	     { field: "name", label: "Tên", width:50},
+			        	     { field: "address", label: "Dia chi"},
+			        	     { field: "city", label: "Thanh pho"},
+			        	],
+                        data_source: [
+                            {id: "MyCompany", name: 12345, address: "HuyPC3"},
+                            {id: "FPT IS", name: 3421, address: "ABC", city: "CDE"},
+                        ],
+                        excel: {
+                            file_name: "Order.xlsx"
+                        }
+                    });
+                report.save_excel();
+
+                var createFile = function (workbook, options) {
+                    var zip = new JSZip();
+                    var files = workbook.generateFiles();
+                    $.each(files, function (path,content) {
+                        path = path.substr(1);
+                        if(path.indexOf('.xml') !== -1 || path.indexOf('.rel') !== -1) {
+                            zip.file(path, content, {base64: false});
+                        } else {
+                            zip.file(path, content, {base64: true, binary: true});
+                        }
+                    })
+                    options = options || {};
+                    if(!options.type){
+                    	options.type = "base64";
+                    }
+                    return zip.generate(options);
+                };
+
+                var rhref = createFile(report.prepare());
+                $("#downloader").attr({
+                    href: "data:application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;base64,"+rhref
+                });
+
+            });
+
+     </script>
+</head>
+<body>
+	 <div class="container">
+	    <div class="row-fluid" id="content" style="margin-top:20px;">
+	    	<a id="downloader">Download</a>
+	    </div>
+	</div>
+</body>
+</html>

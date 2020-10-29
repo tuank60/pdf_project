@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h2>The XMLHttpRequest Object</h2>
+
+<button type="button" onclick="document.write(5 + 6)">Try it</button>
+<button type="button" onclick="loadDoc()">Request data</button>
+
+<p id="demo"></p>
+<script>
+var xmlhttp = new XMLHttpRequest();
+var url = "http://0.0.0.0:8000/";
+
+function loadDoc(){
+
+    xmlhttp.onreadystatechange = function() {
+        document.write(this.readyState,this.status);
+        if (this.readyState == 4 && this.status == 200) {
+            document.write("2");
+            var myArr = JSON.parse(this.responseText);
+            document.write(this.responseText);
+        }
+        document.write(this.readyState,this.status);
+    };
+    xmlhttp.open("GET", url, true);
+    xmlhttp.send();
+};
+</script>
+</body>
+</html>
