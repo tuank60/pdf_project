@@ -10,6 +10,10 @@ async def test(request):
   # return response.empty()
 
 @app.route('/file')
+async def handle_request11(request):
+    return await response.file('GFG.pdf')
+
+@app.route('/file')
 async def handle_request(request):
     return await response.file('GFG.pdf')
 
