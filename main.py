@@ -13,6 +13,10 @@ async def test(request):
 async def handle_request11(request):
     return await response.file('GFG.pdf')
 
+@app.route('/1raw')
+def handle21_request123(request):
+    return response.raw(b'raw data')
+
 @app.route('/file')
 async def handle_request(request):
     return await response.file('GFG.pdf')
